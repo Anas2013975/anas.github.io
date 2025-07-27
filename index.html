@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موقع الألعاب البسيطة</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #001fcc;
+      color: white;
+      padding: 20px 0;
+      font-size: 2rem;
+    }
+    .games-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .game-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    .game-card h3 {
+      margin-top: 0;
+    }
+    .game-card button {
+      padding: 10px 20px;
+      background-color: #001fcc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .game-card button:hover {
+      background-color: #001fcc;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    🎮 موقع الألعاب البسيطة
+  </header>
+
+  <div class="games-container">
+    <div class="game-card">
+      <h3>لعبة XO</h3>
+      <p>العب إكس أو ضد صديقك!</p>
+      <button onclick="location.href='xo.html'">ابدأ اللعبة</button>
+    </div>
+
+    <div class="game-card">
+      <h3>لعبة البازل</h3>
+      <p>ركب الصورة المبعثرة.</p>
+      <button onclick="location.href='puzzle.html'">ابدأ اللعبة</button>
+    </div>
+
+    <div class="game-card">
+      <h3>سباق السرعة</h3>
+      <p>اختبر رد فعلك وسرعتك!</p>
+      <button onclick="location.href='race.html'">ابدأ اللعبة</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 -تصميم أنس 🧠
+  </footer>
+</body>
+</html>

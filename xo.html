@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لعبة XO</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #001fcc;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      font-size: 2rem;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      cursor: pointer;
+    }
+    .cell:hover {
+      background-color: #f1f1f1;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+    .btn {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #001fcc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background-color: #001fcc;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 لعبة XO</h1>
+
+  <div class="board" id="board"></div>
+
+  <div class="message" id="message">الدور على: X</div>
+
+  <button class="btn" onclick="resetGame()">إعادة اللعب</button>
+  <br><br>
+  <button class="btn" onclick="location.href='index.html'">🔙 العودة للرئيسية</button>
+
+  <script>
+    const board = document.getElementById('board');
+    const message = document.getElementById('message');
+    let currentPlayer = 'X';
+    let cells = Array(9).fill('');
+    let gameOver = false;
+
+    function renderBoard() {
+      board.innerHTML = '';
+      cells.forEach((value, i) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.textContent = value;
+        cell.addEventListener('click', () => handleMove(i));
+        board.appendChild(cell);
+      });
+    }
+
+    function handleMove(index) {
+      if (cells[index] || gameOver) return;
+
+      cells[index] = currentPlayer;
+      renderBoard();
+      if (checkWinner()) {
+        message.textContent = `الفائز هو: ${currentPlayer} 🎉`;
+        gameOver = true;
+      } else if (cells.every(cell => cell !== '')) {
+        message.textContent = 'تعادل 😐';
+        gameOver = true;
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        message.textContent = `الدور على: ${currentPlayer}`;
+      }
+    }
+
+    function checkWinner() {
+      const wins = [
+        [0,1,2],[3,4,5],[6,7,8], // صفوف
+        [0,3,6],[1,4,7],[2,5,8], // أعمدة
+        [0,4,8],[2,4,6]          // أقطار
+      ];
+      return wins.some(combo => {
+        const [a, b, c] = combo;
+        return cells[a] && cells[a] === cells[b] && cells[a] === cells[c];
+      });
+    }
+
+    function resetGame() {
+      cells = Array(9).fill('');
+      currentPlayer = 'X';
+      gameOver = false;
+      message.textContent = 'الدور على: X';
+      renderBoard();
+    }
+
+    renderBoard();
+  </script>
+</body>
+</html>
